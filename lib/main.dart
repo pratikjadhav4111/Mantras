@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mantras_page/audiopage.dart';
 
 void main() {
   runApp(MyWidget());
@@ -69,10 +70,9 @@ class _MyWidgetState extends State<MyWidget> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 50), 
+                padding: const EdgeInsets.only(top: 50),
                 child: Row(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.center, 
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
                       'assets/Vector.svg',
@@ -159,7 +159,7 @@ class _MyWidgetState extends State<MyWidget> {
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
-                    color: Color.fromRGBO(242, 146, 27, 0.1),
+                    color: Color.fromRGBO(242, 146, 27, 1),
                   ),
                 ),
               ],
@@ -217,87 +217,98 @@ class _MyWidgetState extends State<MyWidget> {
                             ),
                           ),
                           builder: (context) {
-                            return Container(
-                              width: MediaQuery.of(context).size.width,
-                              padding: EdgeInsets.all(16),
-                              height: 150, // 🔹 कमी केलेली height
-                              child: Row(
-                                children: [
-                                  // LEFT SIDE - Small Image
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.network(
-                                      songList[picindex]["picture"],
-                                      height: 80, // 🔹 छोटं केलं
-                                      width: 80,
-                                      fit: BoxFit.cover,
-                                    ),
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        InAudiopage(), // replace with your screen widget
                                   ),
-                                  SizedBox(width: 16),
+                                );
+                              },
 
-                                  // RIGHT SIDE - Title + Controls
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          songList[picindex]["title"],
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.all(16),
+                                height: 150,
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.network(
+                                        songList[picindex]["picture"],
+                                        height: 80,
+                                        width: 80,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    SizedBox(width: 16),
+
+                                    // RIGHT SIDE - Title + Controls
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            songList[picindex]["title"],
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        SizedBox(height: 12),
+                                          SizedBox(height: 12),
 
-                                        // 🔹 Control Buttons Row
-                                        Row(
-                                          children: [
-                                            IconButton(
-                                              icon: Icon(
-                                                Icons.skip_previous,
-                                                size: 32,
-                                                color: Colors.grey[800],
-                                              ),
-                                              onPressed: () {
-                                                // TODO: Handle previous song
-                                              },
-                                            ),
-                                            IconButton(
-                                              icon: Icon(
-                                                Icons.play_circle_fill,
-                                                size: 40,
-                                                color: Color.fromRGBO(
-                                                  242,
-                                                  146,
-                                                  27,
-                                                  1,
+                                          // 🔹 Control Buttons Row
+                                          Row(
+                                            children: [
+                                              IconButton(
+                                                icon: Icon(
+                                                  Icons.skip_previous,
+                                                  size: 32,
+                                                  color: Colors.grey[800],
                                                 ),
+                                                onPressed: () {
+                                                  // TODO: Handle previous song
+                                                },
                                               ),
-                                              onPressed: () {
-                                                // TODO: Handle play/pause
-                                              },
-                                            ),
-                                            IconButton(
-                                              icon: Icon(
-                                                Icons.skip_next,
-                                                size: 32,
-                                                color: Colors.grey[800],
+                                              IconButton(
+                                                icon: Icon(
+                                                  Icons.play_circle_fill,
+                                                  size: 40,
+                                                  color: Color.fromRGBO(
+                                                    242,
+                                                    146,
+                                                    27,
+                                                    1,
+                                                  ),
+                                                ),
+                                                onPressed: () {
+                                                  // TODO: Handle play/pause
+                                                },
                                               ),
-                                              onPressed: () {
-                                                // TODO: Handle next song
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                              IconButton(
+                                                icon: Icon(
+                                                  Icons.skip_next,
+                                                  size: 32,
+                                                  color: Colors.grey[800],
+                                                ),
+                                                onPressed: () {
+                                                  // TODO: Handle next song
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           },

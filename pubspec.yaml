@@ -19,6 +19,7 @@ dependencies:
   iconify_flutter: ^0.0.7
   flutter_svg: ^2.2.0
   google_fonts: ^6.3.0
+  audioplayers: ^6.5.0
 
 dev_dependencies:
   flutter_test:
@@ -44,6 +45,7 @@ flutter:
   assets: 
     - assets/Vector.svg
     - assets/Group.svg
+    - assets/ganapati.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
